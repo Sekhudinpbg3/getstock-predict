@@ -16,7 +16,7 @@ export const setDefaultDataTable = (page, per_page) => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat data DEFAULT_DATA_TABLE", err);
+        alert("Gagal Memuat data tabel, refresh halaman!", err);
       });
   };
 };
@@ -68,7 +68,7 @@ export const setDataTableWithParams = (parameters, thisPage, perPage) => {
         });
       })
       .catch((error) => {
-        alert("Gagal Memuat data DATA_TABLE_PARAMS", error);
+        alert("Gagal Memuat data tabel, refresh halaman!", error);
       });
   };
 };

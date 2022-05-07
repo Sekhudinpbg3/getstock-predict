@@ -1,6 +1,5 @@
 const initialStateHome = {
   defaultDataTable: '',
-
   dataTableWithParams: '',
 };
 
@@ -13,11 +12,6 @@ export default (state = initialStateHome, { type, payload }) => {
         defaultDataTable: payload,
       };
 
-    case "SET_DATA_COMBO_STOCKS":
-      return {
-        ...state,
-        dataComboBoxStocks: payload,
-      };
     case "SET_DATA_TABLE_WITH_PARAMS":
       return {
         ...state,
