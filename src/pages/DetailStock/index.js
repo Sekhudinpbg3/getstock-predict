@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, HeaderPage } from "../../components";
+import { Button, Gap, HeaderPage, Label } from "../../components";
 
 const DetailStock = () => {
   const history= useNavigate()
@@ -9,8 +9,14 @@ const DetailStock = () => {
   return (
     <div>
       <HeaderPage title={`Detail : ${codeStock.code}`} />
+
+      <div>
+      <Label labelBold={true} />
+      </div>
+
+      <Gap className={`h-10`}/>
       <Button 
-        title={`Back`}
+        title={`back`}
         width={`px-1`}
         height={`py-0.5`}
         onClick={()=>history(`../stock`)}

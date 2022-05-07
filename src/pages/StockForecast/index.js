@@ -48,8 +48,10 @@ const StockForecast = () => {
     setThisPage(1)
   };
 
-  const searchHansler = () => {
-    selectedIndex || selectedIndex || selectedStock
+  console.log('Parameters', parameters);
+
+  const searchHandler = () => {
+    selectedIndex || selectedSector || selectedStock
       ? setParameters({
           index_id: selectedIndex ? selectedIndex.Id : null,
           sector_id: selectedSector ? selectedSector.id : null,
@@ -58,7 +60,6 @@ const StockForecast = () => {
       : setParameters(null);
       setThisPage(1)
   };
-  console.log('Data', dataTableWithParams);
 
   return (
     <div>
@@ -96,7 +97,7 @@ const StockForecast = () => {
         <div className={`w-full flex space-x-2`}>
           <Button
             primary={true}
-            onClick={searchHansler}
+            onClick={searchHandler}
             width={`px-3`}
             title={`Search`}
           />

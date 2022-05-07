@@ -9,7 +9,7 @@ const Input = ({ title, ...rest }) => {
       </div>
       <div className={`w-full relative`}>
         <input
-          className={`focus:outline-none w-full rounded px-2 py-0.5 md:py-1 text-xs md:text-sm lg:text-base text-gray-500 font-inter border border-gray-300`}
+          className={`focus:outline-none w-full rounded px-2 py-1 md:py-1 text-xs md:text-sm lg:text-base text-gray-500 font-inter border border-gray-300`}
           {...rest}
         />
       </div>
