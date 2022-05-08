@@ -72,3 +72,12 @@ export const setDataTableWithParams = (parameters, thisPage, perPage) => {
       });
   };
 };
+
+export const setResetDataTable = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "RESET_DATA_TABLE",
+      payload: '',
+    });
+  };
+};

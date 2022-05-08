@@ -10,7 +10,11 @@ import {
   Table,
   TextDinamis,
 } from "../../components";
-import { setDataTableWithParams } from "../../config/redux/actions/home_action";
+import { setResetAllDataDetail } from "../../config/redux/actions";
+import {
+  setDataTableWithParams,
+  setResetDataTable,
+} from "../../config/redux/actions/home_action";
 
 const StockForecast = () => {
   const dispatch = useDispatch();
@@ -41,16 +45,23 @@ const StockForecast = () => {
   }, [dispatch, thisPage, parameters]);
 
   const reset = () => {
-    setParameters(null);
-    setSelectedIndex(null);
-    setSelectedSector(null);
-    setSelectedStock('');
-    setThisPage(1)
+    if (selectedIndex || selectedSector || selectedStock) {
+      dispatch(setResetDataTable());
+      setParameters(null);
+      setSelectedIndex(null);
+      setSelectedSector(null);
+      setSelectedStock("");
+      setThisPage(1);
+    } else {
+      dispatch(setDataTableWithParams(parameters, thisPage, perPage));
+    }
   };
 
-  console.log('Parameters', parameters);
-
   const searchHandler = () => {
+    if (selectedIndex || selectedSector || selectedStock) {
+      dispatch(setResetDataTable());
+    }
+
     selectedIndex || selectedSector || selectedStock
       ? setParameters({
           index_id: selectedIndex ? selectedIndex.Id : null,
@@ -58,7 +69,7 @@ const StockForecast = () => {
           stock_code: selectedStock ? selectedStock : null,
         })
       : setParameters(null);
-      setThisPage(1)
+    setThisPage(1);
   };
 
   return (
@@ -121,21 +132,31 @@ const StockForecast = () => {
           <TextDinamis title={thisPage} />
         </div>
         <Gap className={`h-1`} />
-        <Table datas={dataTableWithParams.data} />
+        <Table
+          datas={dataTableWithParams.data}
+          onClickLink={() => {
+            dispatch(setResetAllDataDetail());
+          }}
+        />
         <Gap className={`h-3 lg:h-5 w-full bg-white`} />
         <Pagination
           currentPage={thisPage}
           allPageList={listPage}
           onClickPrev={() => {
+            dispatch(setResetDataTable());
             thisPage !== 1 ? setThisPage(thisPage - 1) : setThisPage(thisPage);
             // setListStock();
           }}
           onClickPage={(e) => {
             const num = parseInt(e.target.firstChild.data);
+            if (thisPage !== num) {
+              dispatch(setResetDataTable());
+            }
             setThisPage(num);
             // setListStock();
           }}
           onClickNext={() => {
+            dispatch(setResetDataTable());
             thisPage < listPage.length
               ? setThisPage(thisPage + 1)
               : setThisPage(thisPage);

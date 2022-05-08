@@ -35,6 +35,15 @@ export default (state = initialStateDetail, { type, payload }) => {
         ...state,
         detailCashFlow: payload,
       };
+    case "SET_RESET_ALL_DETAIL":
+      return {
+        ...state,
+        detailInfo: payload,
+        detailHistory: payload,
+        detailBalanceSheet: payload,
+        detailEarnings: payload,
+        detailCashFlow: payload,
+      };
     default:
       return state;
   }

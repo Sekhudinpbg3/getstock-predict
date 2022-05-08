@@ -77,20 +77,29 @@ export const setDetailEarnings = (code) => {
 };
 
 export const setDetailCashflow = (code) => {
-    const url = `https://flask-prediction-api.herokuapp.com/api/get_cashflow?code=${code}`;
-    return (dispatch) => {
-      axios
-        .get(url)
-        .then((response) => {
-          const responseAPI = response.data;
-  
-          dispatch({
-            type: "SET_DETAIL_CASHFLOW",
-            payload: responseAPI,
-          });
-        })
-        .catch((err) => {
-          alert("Gagal Memuat detail cashflow, refresh halaman!", err);
+  const url = `https://flask-prediction-api.herokuapp.com/api/get_cashflow?code=${code}`;
+  return (dispatch) => {
+    axios
+      .get(url)
+      .then((response) => {
+        const responseAPI = response.data;
+
+        dispatch({
+          type: "SET_DETAIL_CASHFLOW",
+          payload: responseAPI,
         });
-    };
+      })
+      .catch((err) => {
+        alert("Gagal Memuat detail cashflow, refresh halaman!", err);
+      });
   };
+};
+
+export const setResetAllDataDetail = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "SET_RESET_ALL_DETAIL",
+      payload: "",
+    });
+  };
+};

@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import { Label, Link, Loading, TextDinamis } from "../../atoms";
 
-const Table = ({ datas, height, ...props }) => {
+const Table = ({ datas, height, onClickLink, ...props }) => {
   const allStockData = datas
     ? datas.length > 0
       ? datas.map((stock, index) => {
@@ -96,7 +96,14 @@ const Table = ({ datas, height, ...props }) => {
                         <Link
                           textLink={stock[emiten]}
                           customColor={`text-gray-500`}
-                          href={`../stock/detail/${stock[emiten]}`}
+                          href={`../stock/detail/info/${stock[emiten]}`}
+                          onClick={
+                            onClickLink
+                              ? onClickLink
+                              : () => {
+                                  alert("tambahkan function onClickLink!");
+                                }
+                          }
                         />
                       ) : key === 15 ||
                         key === 16 ||
