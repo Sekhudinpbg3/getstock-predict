@@ -1,4 +1,5 @@
 import React from "react";
+import TextDinamis from "../text-dinamis";
 
 const Label = ({
   title,
@@ -21,9 +22,21 @@ const Label = ({
     : "text-gray-500";
 
   return (
-    <p className={className ? className : `${font} ${color} ${label_style} `}>
-      {title ? title : `your-label`}
-    </p>
+    <div className={`w-full`}>
+      {title ? (
+        <p
+          className={className ? className : `${font} ${color} ${label_style} `}
+        >
+          {title}
+        </p>
+      ) : (
+        <div
+          className={'px-2 py-1 w-full bg-gray-100 animate-pulse'}
+        >
+        <TextDinamis title={'Loading...'} />
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -47,6 +47,7 @@ const DetailStock = () => {
         linkFinancials={`financials/${code}`}
         code={code}
       />
+      <Gap className={`h-4`} />
       <div>
         <Outlet />
       </div>

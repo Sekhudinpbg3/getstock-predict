@@ -138,7 +138,7 @@ const Table = ({ datas, height, onClickLink, ...props }) => {
         <div
           className={`w-full h-full bg-neutral-100 flex justify-center items-center `}
         >
-          <div className={`animate-pulse`}>
+          <div>
             <Loading />
           </div>
         </div>

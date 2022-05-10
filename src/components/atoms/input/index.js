@@ -1,7 +1,7 @@
 import React from "react";
 import Label from "../label";
 
-const Input = ({ title, ...rest }) => {
+const Input = ({ title, disabled, ...rest }) => {
   return (
     <div className={`w-full flex justify-center items-center`}>
       <div className={`w-1/4 mr-3`}>
@@ -10,6 +10,11 @@ const Input = ({ title, ...rest }) => {
       <div className={`w-full relative`}>
         <input
           className={`focus:outline-none w-full rounded px-2 py-1 md:py-1 text-xs md:text-sm lg:text-base text-gray-500 font-inter border border-gray-300`}
+          spellCheck={'false'}
+          autoCapitalize={'off'}
+          autoComplete={'off'}
+          autoCorrect={'off'}
+          disabled={disabled?true:false}
           {...rest}
         />
       </div>

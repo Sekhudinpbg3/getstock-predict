@@ -60,6 +60,7 @@ const StockForecast = () => {
   const searchHandler = () => {
     if (selectedIndex || selectedSector || selectedStock) {
       dispatch(setResetDataTable());
+      setThisPage(1);
     }
 
     selectedIndex || selectedSector || selectedStock
@@ -69,7 +70,6 @@ const StockForecast = () => {
           stock_code: selectedStock ? selectedStock : null,
         })
       : setParameters(null);
-    setThisPage(1);
   };
 
   return (

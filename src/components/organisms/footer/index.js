@@ -1,7 +1,7 @@
 import React from "react";
 import { Github, Instagram, Linkedin } from "../../../assets/icons";
 import { DataImage } from "../../../assets/images";
-import { Icon, Label, Link, TextDinamis } from "../../atoms";
+import { Gap, IconAhref, Label, Link, TextDinamis } from "../../atoms";
 
 const Footer = () => {
   return (
@@ -20,10 +20,9 @@ const Footer = () => {
               title={`What's Next?`}
             />
             <div className={`text-center`}>
-              <Icon
+              <IconAhref
                 src={DataImage}
-                className={`w-40 -mt-5 bg-white`}
-                hover={true}
+                className={`w-40 h-40 -mt-5 bg-white`}
               />
               <Label
                 className={`font-inter -mt-8 mb-2 text-sm font-semibold text-gray-500`}
@@ -64,15 +63,31 @@ const Footer = () => {
               className={`font-inter text-base font-bold text-gray-500 my-2`}
               title={`Connect with Us`}
             />
+            <Gap className={`h-2`} />
             <div className={`flex justify-between`}>
-              <Icon src={Github} className={`w-8 mt-2 mx-1 hover:rotate-12`} />
-              <Icon
-                src={Instagram}
-                className={`w-8 mt-2 mx-1 hover:rotate-12`}
+              <IconAhref
+                src={Github}
+                alt={`Github`}
+                className={`w-8 h-8 mx-1 bg-white`}
+                hover={`lg:hover:rotate-12`}
+                wdLoader={`h-1 w-1`}
+                spaceXLoader={`space-x-1`}
               />
-              <Icon
+              <IconAhref
+                src={Instagram}
+                alt={`Instagram`}
+                className={`w-8 h-8 mx-1`}
+                hover={`lg:hover:rotate-12`}
+                wdLoader={`h-1 w-1`}
+                spaceXLoader={`space-x-1`}
+              />
+              <IconAhref
                 src={Linkedin}
-                className={`w-8 mt-2 mx-1 hover:rotate-12`}
+                alt={`Linkedin`}
+                className={`w-8 h-8 mx-1 bg-white`}
+                hover={`lg:hover:rotate-12`}
+                wdLoader={`h-1 w-1`}
+                spaceXLoader={`space-x-1`}
               />
             </div>
           </div>

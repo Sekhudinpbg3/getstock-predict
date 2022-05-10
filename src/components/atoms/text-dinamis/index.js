@@ -7,6 +7,7 @@ const TextDinamis = ({
   textColor,
   className,
   semibold,
+  textjustify
 }) => {
   const textType = textLight
     ? "font-light text-xs md:text-sm lg:text-base cursor-default"
@@ -15,11 +16,22 @@ const TextDinamis = ({
     : "font-normal text-xs md:text-sm lg:text-base cursor-default";
   const font = fontFamily ? fontFamily : "font-inter";
   const color = textColor ? textColor : "text-gray-500";
+  const justify = textjustify===true?'text-justify':''
 
   return (
-    <p className={className ? className : `${font} ${color} ${textType}`}>
-      {title ? title : `your-dinamic-text`}
-    </p>
+    <div className={`w-full`}>
+      {title ? (
+        <p className={className ? className : `${font} ${color} ${textType} ${justify}`}>
+          {title}
+        </p>
+      ) : (
+        <div className={"px-2 py-1 w-full bg-gray-100 animate-pulse"}>
+          <p className={className ? className : `${font} ${color} ${textType}`}>
+            Loading...
+          </p>
+        </div>
+      )}
+    </div>
   );
 };
 

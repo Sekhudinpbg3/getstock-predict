@@ -5,7 +5,7 @@ const Loading = ({ width, color, spaceX }) => {
   const clr = color ? color : "bg-gray-500";
   const spX = spaceX ? spaceX : "space-x-2";
   return (
-    <div className={`${spX} flex`}>
+    <div className={`${spX} flex animate-pulse`}>
       <div className={`${wd} ${clr} rounded-full`}></div>
       <div className={`${wd} ${clr} rounded-full`}></div>
       <div className={`${wd} ${clr} rounded-full`}></div>

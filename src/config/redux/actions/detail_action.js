@@ -14,7 +14,7 @@ export const setDetailInfo = (code) => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat detail info, refresh halaman!", err);
+        console.log("Gagal Memuat detail info, refresh halaman!", err);
       });
   };
 };
@@ -33,7 +33,7 @@ export const setDetailHistory = (code) => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat detail history, refresh halaman!", err);
+        console.log("Gagal Memuat detail history, refresh halaman!", err);
       });
   };
 };
@@ -52,7 +52,7 @@ export const setDetailBalanceSheet = (code) => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat detail balancesheet, refresh halaman!", err);
+        console.log("Gagal Memuat detail balancesheet, refresh halaman!", err);
       });
   };
 };
@@ -71,7 +71,7 @@ export const setDetailEarnings = (code) => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat detail earnings, refresh halaman!", err);
+        console.log("Gagal Memuat detail earnings, refresh halaman!", err);
       });
   };
 };
@@ -90,7 +90,7 @@ export const setDetailCashflow = (code) => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat detail cashflow, refresh halaman!", err);
+        console.log("Gagal Memuat detail cashflow, refresh halaman!", err);
       });
   };
 };

@@ -4,5 +4,6 @@ import Instagram from "./ig-instagram.png";
 import Linkedin from "./linkedin.png";
 import Telegram from "./telegram.png";
 import Whatsapp from "./whatsapp-round-color.png";
+import NoImage from './no-pictures.png'
 
-export { Github, Gmail, Instagram, Linkedin, Telegram, Whatsapp };
+export { Github, Gmail, Instagram, Linkedin, Telegram, Whatsapp, NoImage };

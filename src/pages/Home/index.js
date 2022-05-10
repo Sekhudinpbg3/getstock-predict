@@ -3,7 +3,6 @@ import { CardIcon, Gap, Label, Link, TextDinamis } from "../../components";
 import { RecomendSystem, Stockimage } from "../../assets";
 
 const Home = () => {
-
   return (
     <div className={`w-screen max-h-screen`}>
       <div className={`text-center mx-8 mt-8 md:mt-12`}>
@@ -16,23 +15,24 @@ const Home = () => {
           title={`This page is a simple implementation of what we learned during our
           independent study activities.`}
         />
-        <Gap className={`h-5 md:h-7 lg:h-10 w-full`} />
+        <Gap className={`h-3 md:h-5 lg:h-7 w-full`} />
         <Label
           title={`To continue select one`}
           customFont={`font-releway`}
           labelBold={true}
         />
-        <Gap className={`h-5 md:h-6 lg:h-8 2xl:h-10 w-full`} />
+        <Gap className={`h-3 md:h-5 lg:h-7 2xl:h-10 w-full`} />
       </div>
 
       <div className={`flex justify-center`}>
         <div className={`block md:flex md:justify-center md:items-center`}>
-          <div className={`w-72 md:w-80 lg:w-96 `}>
+          <div>
             <CardIcon
-              src={RecomendSystem}
-              title={`Recomend System`}
-              href={`/main/recsys`}
-              navigate={`/main/recsys`}
+              src={Stockimage}
+              className={`w-72 h-72 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
+              title={`Stock Forecasting`}
+              href={`/main/stock`}
+              navigate={`/main/stock`}
             />
           </div>
           <div className={`text-center`}>
@@ -41,12 +41,13 @@ const Home = () => {
               className={`text-gray-400 font-releway font-semibold mx-8 lg:mx-12 my-3 lg:font-bold`}
             />
           </div>
-          <div className={`w-72 md:w-80 lg:w-96`}>
+          <div>
             <CardIcon
-              src={Stockimage}
-              title={`Stock Forecasting`}
-              href={`/main/stock`}
-              navigate={`/main/stock`}
+              src={RecomendSystem}
+              className={`w-72 h-72 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
+              title={`Recomend System`}
+              href={`/main/recsys`}
+              navigate={`/main/recsys`}
             />
           </div>
         </div>

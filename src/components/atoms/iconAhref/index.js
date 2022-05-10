@@ -1,18 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NoImage } from "../../../assets";
 import Loading from "../loading-animation";
 
-const Icon = ({ src, href, alt, className, hover, wdLoader, spaceXLoader }) => {
+const IconAhref = ({
+  src,
+  href,
+  alt,
+  className,
+  hover,
+  wdLoader,
+  spaceXLoader,
+}) => {
   const customClassName = className ? className : "w-10 h-10 bg-white";
   const isHovers = hover ? hover : "lg:hover:p-0.5";
 
   return (
     <div className={`${customClassName}`}>
-      <Link to={href ? href : `#`} >
+      <a href={href ? href : `#`} target={`_blank`}>
         {src ? (
           src !== "" ? (
             <div className={`${isHovers}`}>
-              <img src={src} alt={alt ? alt : `your-icon`} />
+              <img
+                src={src}
+                alt={alt ? alt : `your-icon`}
+                onError={(event) => {
+                  event.target.src = NoImage;
+                  event.onerror = null;
+                }}
+              />
             </div>
           ) : (
             <div
@@ -34,9 +49,9 @@ const Icon = ({ src, href, alt, className, hover, wdLoader, spaceXLoader }) => {
             />
           </div>
         )}
-      </Link>
+      </a>
     </div>
   );
 };
 
-export default Icon;
+export default IconAhref;
