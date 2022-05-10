@@ -8,7 +8,7 @@ const CardIcon = ({ src, title, className, href, navigate }) => {
     <div className={`p-2 shadow-lg shadow-gray-200 rounded`}>
       <Icon
         src={src}
-        className={className ? className : `w-full bg-white`}
+        className={className ? className : `w-full`}
         href={href ? href : `#`}
       />
       <Button

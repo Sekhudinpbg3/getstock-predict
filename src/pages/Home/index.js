@@ -26,15 +26,13 @@ const Home = () => {
 
       <div className={`flex justify-center`}>
         <div className={`block md:flex md:justify-center md:items-center`}>
-          <div>
             <CardIcon
               src={Stockimage}
-              className={`w-72 h-72 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
+              className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
               title={`Stock Forecasting`}
               href={`/main/stock`}
               navigate={`/main/stock`}
             />
-          </div>
           <div className={`text-center`}>
             <Label
               title={`or `}
@@ -44,7 +42,7 @@ const Home = () => {
           <div>
             <CardIcon
               src={RecomendSystem}
-              className={`w-72 h-72 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
+              className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
               title={`Recomend System`}
               href={`/main/recsys`}
               navigate={`/main/recsys`}
