@@ -1,12 +1,29 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Gap, IconAhref, Input, Label, TextDinamis } from "../../atoms";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import {
+  setDetailResultPredictionLR,
+  setResetDetailResultPredictionLR,
+} from "../../../config/redux/actions/detail_action";
+import { Button, Gap, IconAhref, Input, Label, TextDinamis } from "../../atoms";
 import { ToggleInput } from "../../molekuls";
 import { DisclosureCustom } from "../../organisms";
 
 const StockDetailInfo = () => {
-  const { detailInfo } = useSelector((state) => state.detailReducer);
+  const dispatch = useDispatch();
+  const { detailInfo, detailResultPrediction } = useSelector(
+    (state) => state.detailReducer
+  );
   const InfoEmiten = detailInfo ? detailInfo.result : "";
+  // Variabel untuk data prediksi
+  const param = useParams();
+  const code = param.code;
+  const [open, setOpen] = useState(0);
+  const [high, setHigh] = useState(0);
+  const [low, setLow] = useState(0);
+  const [auto, setAuto] = useState(false);
+
+  // variabel json untul komponen disclosure
   const infoDetail = InfoEmiten
     ? {
         "Harga Pembukaan": InfoEmiten["open"].toLocaleString(),
@@ -43,6 +60,22 @@ const StockDetailInfo = () => {
     // Tambahkan data disini
   };
 
+  // Function TogleOnclick
+  const toggleOnClick = () => {
+    dispatch(setResetDetailResultPredictionLR());
+    if (auto === false) {
+      setOpen(InfoEmiten["open"]);
+      setHigh(InfoEmiten["high"]);
+      setLow(InfoEmiten["low"]);
+      setAuto(true);
+    } else if (auto === true) {
+      setOpen(0);
+      setHigh(0);
+      setLow(0);
+      setAuto(false);
+    }
+  };
+
   const dataDisclosurePredict = {
     Prediksi: (
       <div className={`px-4 py-2 bg-white rounded shadow`}>
@@ -58,9 +91,17 @@ const StockDetailInfo = () => {
     ),
   };
 
-  // Bagian Toggle prediksi
-  const [enableToggle, setEnableToggle] = useState(false);
-  console.log('Manual', enableToggle);
+  // fungsi onsubmmit prediction
+  const form = {
+    code: code,
+    open: open,
+    high: high,
+    low: low,
+  };
+  const onSubmitPrediction = () => {
+    dispatch(setDetailResultPredictionLR(form));
+  };
+  console.log("PREDICTION: ", detailResultPrediction);
 
   return (
     <div>
@@ -82,19 +123,86 @@ const StockDetailInfo = () => {
       <Gap className={`h-2`} />
       <Label title={"Prediksi"} labelBold />
       <DisclosureCustom listData={dataDisclosurePredict} />
-      <div className={`w-3/4 px-4 py-2`}>
-        <ToggleInput
-          titleOnOff={["Manual", "Otomatis"]}
-          onClick={() => {
-            enableToggle ? setEnableToggle(false) : setEnableToggle(true);
-          }}
-        />
-        <Input title={"Open"} />
-        <Gap className={`h-1`} />
-        <Input title={"High"} />
-        <Gap className={`h-1`} />
-        <Input title={"Low"} />
-        <Gap className={`h-1`} />
+      <div className={`w-3/4 sm:w-1/2 lg:w-1/3 px-4 py-2`}>
+        {InfoEmiten ? (
+          <div>
+            <ToggleInput
+              titleOnOff={["Otomatis", "Manual"]}
+              setDefault={false}
+              onClick={toggleOnClick}
+            />
+            <Gap className={`h-3`} />
+            <Input
+              title={"Open"}
+              type={"number"}
+              readOnly={auto}
+              value={open}
+              onChange={(e) => {
+                e.target.value < 0 ? setOpen("") : setOpen(e.target.value);
+              }}
+            />
+            <Gap className={`h-1`} />
+            <Input
+              title={"High"}
+              type={"number"}
+              readOnly={auto}
+              value={high}
+              onChange={(e) => {
+                e.target.value < 0 ? setHigh("") : setHigh(e.target.value);
+              }}
+            />
+            <Gap className={`h-1`} />
+            <Input
+              title={"Low"}
+              type={"number"}
+              readOnly={auto}
+              value={low}
+              onChange={(e) => {
+                e.target.value < 0 ? setLow("") : setLow(e.target.value);
+              }}
+            />
+            <Gap className={`h-3`} />
+            <Button
+              primary={true}
+              title="Prediksi"
+              onClick={onSubmitPrediction}
+            />
+            <Gap className={"h-3"} />
+            {detailResultPrediction ? (
+              <div>
+                <TextDinamis title={"Result:"} semibold />
+                <div className="text-center py-2 border-2 rounded">
+                  <Label
+                    title={Math.floor(detailResultPrediction["result"])}
+                    customColor={"text-green-500"}
+                  />
+                </div>
+                <Gap className={`h-3`} />
+                <TextDinamis title={"MAE:"} semibold />
+                <div className="text-center py-2 border-2 rounded">
+                  <Label
+                    title={Math.floor(detailResultPrediction["mae"])}
+                    customColor={"text-green-500"}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <TextDinamis title={"Result:"} semibold />
+                <div className="text-center py-2 border-2 rounded">
+                  <Label title={"0"} customColor={"text-green-500"} />
+                </div>
+                <Gap className={`h-3`} />
+                <TextDinamis title={"MAE:"} semibold />
+                <div className="text-center py-2 border-2 rounded">
+                  <Label title={"0"} customColor={"text-green-500"} />
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <TextDinamis />
+        )}
       </div>
     </div>
   );

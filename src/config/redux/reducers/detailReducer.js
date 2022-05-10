@@ -5,6 +5,8 @@ const initialStateDetail = {
   detailBalanceSheet: "",
   detailEarnings: "",
   detailCashFlow: "",
+
+  detailResultPrediction: "",
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -43,6 +45,16 @@ export default (state = initialStateDetail, { type, payload }) => {
         detailBalanceSheet: payload,
         detailEarnings: payload,
         detailCashFlow: payload,
+      };
+    case "SET_DETAIL_PREDICTION_LR":
+      return {
+        ...state,
+        detailResultPrediction: payload,
+      };
+      case "SET_RESET_DETAIL_PREDICTION_LR":
+      return {
+        ...state,
+        detailResultPrediction: payload,
       };
     default:
       return state;

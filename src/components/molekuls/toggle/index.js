@@ -9,16 +9,17 @@ const ToggleInput = ({
   toColor,
   titleOnOff,
   enableToggle,
+  setDefault,
   ...props
 }) => {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(setDefault ? setDefault : false);
   const title = titleOnOff ? titleOnOff : ["On", "Off"];
   const from = fromColor ? fromColor : "bg-gray-200";
   const to = toColor ? toColor : "bg-green-500";
   return (
     <div className="flex justify-center items-center">
       <Switch
-        checked={enableToggle?enableToggle:enabled}
+        checked={enableToggle ? enableToggle : enabled}
         onChange={setEnabled}
         className={`${
           enabled ? `${to} border-r-2 border-white` : `${from}`
@@ -35,7 +36,7 @@ const ToggleInput = ({
           } transform rounded-full bg-white outline-2 shadow`}
         />
       </Switch>
-      <Gap className={"h-2 w-2"} />
+      <Gap className={"h-4 w-4"} />
       <TextDinamis title={enabled ? title[0] : title[1]} textLight={true} />
     </div>
   );

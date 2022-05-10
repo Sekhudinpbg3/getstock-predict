@@ -95,6 +95,42 @@ export const setDetailCashflow = (code) => {
   };
 };
 
+export const setDetailResultPredictionLR = (form) => {
+  const data = new FormData();
+  data.append("code", form.code);
+  data.append("open", form.open);
+  data.append("high", form.high);
+  data.append("low", form.low);
+  return (dispatch) => {
+    axios
+      .post(`https://flask-prediction-api.herokuapp.com/api/lr_predict`, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        const responseAPI = response.data;
+
+        dispatch({
+          type: "SET_DETAIL_PREDICTION_LR",
+          payload: responseAPI,
+        });
+      })
+      .catch((err) => {
+        console.log("Gagal Memuat detail cashflow, refresh halaman!", err);
+      });
+  };
+};
+
+export const setResetDetailResultPredictionLR = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "SET_RESET_DETAIL_PREDICTION_LR",
+      payload: "",
+    });
+  };
+};
+
 export const setResetAllDataDetail = () => {
   return (dispatch) => {
     dispatch({
