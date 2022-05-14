@@ -1,30 +1,33 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { Button, Gap, NavigateDetail } from "../../components";
 import {
+  setAutoFill,
   setDetailBalanceSheet,
   setDetailCashflow,
   setDetailEarnings,
   setDetailHistory,
   setDetailInfo,
+  setResetAllDetail,
+  setResetAllPrediction,
 } from "../../config/redux/actions";
 
 const DetailStock = () => {
+  const { periodHistory } = useSelector((state) => state.detailReducer);
   const dispatch = useDispatch();
 
   const history = useNavigate();
   const param = useParams();
   const code = param.code;
-
   // useEffect to get Data from API
   useEffect(() => {
     dispatch(setDetailInfo(code));
   }, [dispatch, code]);
 
   useEffect(() => {
-    dispatch(setDetailHistory(code));
-  }, [dispatch, code]);
+    dispatch(setDetailHistory(code, periodHistory));
+  }, [dispatch, code, periodHistory]);
 
   useEffect(() => {
     dispatch(setDetailEarnings(code));
@@ -57,7 +60,12 @@ const DetailStock = () => {
         title={`back`}
         width={`px-1`}
         height={`py-0.5`}
-        onClick={() => history(`../stock`)}
+        onClick={() => {
+          dispatch(setResetAllDetail());
+          dispatch(setResetAllPrediction());
+          dispatch(setAutoFill(true));
+          history(`../stock`);
+        }}
       />
     </div>
   );

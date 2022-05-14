@@ -7,7 +7,8 @@ const TextDinamis = ({
   textColor,
   className,
   semibold,
-  textjustify
+  textAlign,
+  wfull,
 }) => {
   const textType = textLight
     ? "font-light text-xs md:text-sm lg:text-base cursor-default"
@@ -16,12 +17,17 @@ const TextDinamis = ({
     : "font-normal text-xs md:text-sm lg:text-base cursor-default";
   const font = fontFamily ? fontFamily : "font-inter";
   const color = textColor ? textColor : "text-gray-500";
-  const justify = textjustify===true?'text-justify':''
+  const justify = textAlign ? textAlign : "text-left";
+  const widthContainer = wfull ? "w-full" : "";
 
   return (
-    <div className={`w-full`}>
+    <div className={widthContainer}>
       {title ? (
-        <p className={className ? className : `${font} ${color} ${textType} ${justify}`}>
+        <p
+          className={
+            className ? className : `${font} ${color} ${textType} ${justify}`
+          }
+        >
           {title}
         </p>
       ) : (

@@ -1,8 +1,6 @@
 const initialStateGlobal = {
   allStocks: null,
-
   allIndex: null,
-
   allSectors: null
 };
 

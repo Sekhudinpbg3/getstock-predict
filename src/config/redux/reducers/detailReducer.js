@@ -1,12 +1,12 @@
 const initialStateDetail = {
   detailInfo: "",
   detailHistory: "",
+  periodHistory: "2y",
+  // valid period 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
 
   detailBalanceSheet: "",
   detailEarnings: "",
   detailCashFlow: "",
-
-  detailResultPrediction: "",
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -37,24 +37,18 @@ export default (state = initialStateDetail, { type, payload }) => {
         ...state,
         detailCashFlow: payload,
       };
-    case "SET_RESET_ALL_DETAIL":
+    case "SET_PERIOD_HISTORY":
       return {
         ...state,
-        detailInfo: payload,
-        detailHistory: payload,
-        detailBalanceSheet: payload,
-        detailEarnings: payload,
-        detailCashFlow: payload,
+        periodHistory: payload,
       };
-    case "SET_DETAIL_PREDICTION_LR":
+    case "RESET_ALL_DETAIL":
       return {
-        ...state,
-        detailResultPrediction: payload,
-      };
-      case "SET_RESET_DETAIL_PREDICTION_LR":
-      return {
-        ...state,
-        detailResultPrediction: payload,
+        detailInfo: "",
+        detailHistory: "",
+        detailBalanceSheet: "",
+        detailEarnings: "",
+        detailCashFlow: "",
       };
     default:
       return state;

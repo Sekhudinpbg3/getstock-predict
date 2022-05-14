@@ -19,11 +19,17 @@ export const setDetailInfo = (code) => {
   };
 };
 
-export const setDetailHistory = (code) => {
+export const setDetailHistory = (code, perioHistory) => {
+  const data = new FormData();
+  data.append("period", perioHistory);
   const url = `https://flask-prediction-api.herokuapp.com/api/get_history?code=${code}`;
   return (dispatch) => {
     axios
-      .get(url)
+      .post(url, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         const responseAPI = response.data;
 
@@ -95,47 +101,19 @@ export const setDetailCashflow = (code) => {
   };
 };
 
-export const setDetailResultPredictionLR = (form) => {
-  const data = new FormData();
-  data.append("code", form.code);
-  data.append("open", form.open);
-  data.append("high", form.high);
-  data.append("low", form.low);
-  return (dispatch) => {
-    axios
-      .post(`https://flask-prediction-api.herokuapp.com/api/lr_predict`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        const responseAPI = response.data;
-
-        dispatch({
-          type: "SET_DETAIL_PREDICTION_LR",
-          payload: responseAPI,
-        });
-      })
-      .catch((err) => {
-        console.log("Gagal Memuat detail cashflow, refresh halaman!", err);
-      });
-  };
-};
-
-export const setResetDetailResultPredictionLR = () => {
+export const setPeriodHistory = (value) => {
   return (dispatch) => {
     dispatch({
-      type: "SET_RESET_DETAIL_PREDICTION_LR",
-      payload: "",
+      type: "SET_PERIOD_HISTORY",
+      payload: value
     });
   };
 };
 
-export const setResetAllDataDetail = () => {
+export const setResetAllDetail = () => {
   return (dispatch) => {
     dispatch({
-      type: "SET_RESET_ALL_DETAIL",
-      payload: "",
+      type: "RESET_ALL_DETAIL",
     });
   };
 };

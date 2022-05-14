@@ -1,25 +1,25 @@
 import axios from "axios";
 
-export const setDefaultDataTable = (page, per_page) => {
-  const req_page = page ? page : 1;
-  const req_perPage = per_page ? per_page : 100;
-  const url = `https://getstock-info.herokuapp.com/v1/stocks/search?page=${req_page}&per_page=${req_perPage}`;
-  return (dispatch) => {
-    axios
-      .get(url)
-      .then((response) => {
-        const responseAPI = response.data;
+// export const setDefaultDataTable = (page, per_page) => {
+//   const req_page = page ? page : 1;
+//   const req_perPage = per_page ? per_page : 100;
+//   const url = `https://getstock-info.herokuapp.com/v1/stocks/search?page=${req_page}&per_page=${req_perPage}`;
+//   return (dispatch) => {
+//     axios
+//       .get(url)
+//       .then((response) => {
+//         const responseAPI = response.data;
 
-        dispatch({
-          type: "SET_DATA_TABLE_DEFAULT",
-          payload: responseAPI,
-        });
-      })
-      .catch((err) => {
-        alert("Gagal Memuat data tabel, refresh halaman!", err);
-      });
-  };
-};
+//         dispatch({
+//           type: "SET_DATA_TABLE_DEFAULT",
+//           payload: responseAPI,
+//         });
+//       })
+//       .catch((err) => {
+//         alert("Gagal Memuat data tabel, refresh halaman!", err);
+//       });
+//   };
+// };
 
 export const setDataTableWithParams = (parameters, thisPage, perPage) => {
   const indexId = parameters ? parameters.index_id : null;

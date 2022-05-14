@@ -4,10 +4,6 @@ import React from "react";
 import { Button, ComboBoxLabel, Gap, HeaderPage } from "../../components";
 
 const RecomendSystem = () => {
-  // const {allStocks, allIndex, allSectors } = useSelector(
-  //   (state) => state.globalReducer
-  // );
-  // console.log(allStocks);
 
   return (
     <div>

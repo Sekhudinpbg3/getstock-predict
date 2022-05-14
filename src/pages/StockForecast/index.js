@@ -10,7 +10,7 @@ import {
   Table,
   TextDinamis,
 } from "../../components";
-import { setResetAllDataDetail } from "../../config/redux/actions";
+import { setResetAllDetail } from "../../config/redux/actions";
 import {
   setDataTableWithParams,
   setResetDataTable,
@@ -42,6 +42,7 @@ const StockForecast = () => {
 
   useEffect(() => {
     dispatch(setDataTableWithParams(parameters, thisPage, perPage));
+    dispatch(setResetAllDetail());
   }, [dispatch, thisPage, parameters]);
 
   const reset = () => {
@@ -135,7 +136,6 @@ const StockForecast = () => {
         <Table
           datas={dataTableWithParams.data}
           onClickLink={() => {
-            dispatch(setResetAllDataDetail());
           }}
         />
         <Gap className={`h-3 lg:h-5 w-full bg-white`} />

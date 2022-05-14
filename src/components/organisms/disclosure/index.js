@@ -1,4 +1,4 @@
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Transition } from "@headlessui/react";
 import React from "react";
 import { TextDinamis } from "../../atoms";
 import { MiniChevronDown, MiniChevronUp } from "../../../assets";
@@ -52,10 +52,25 @@ const DisclosureCustom = ({ listData }) => {
                       />
                     )}
                   </Disclosure.Button>
-
-                  <Disclosure.Panel className={index === lengthData?`py-1 px-2 mt-1`:`py-1 px-2 mb-3`}>
-                    {data[menuDisclosure]}
-                  </Disclosure.Panel>
+                  <Transition
+                    show={open}
+                    enter="transition duration-100 ease-out"
+                    enterFrom="transform scale-95 opacity-0"
+                    enterTo="transform scale-100 opacity-100"
+                    leave="transition duration-75 ease-out"
+                    leaveFrom="transform scale-100 opacity-100"
+                    leaveTo="transform scale-95 opacity-0"
+                  >
+                    <Disclosure.Panel
+                      className={
+                        index === lengthData
+                          ? `py-1 px-2 mt-1`
+                          : `py-1 px-2 mb-3`
+                      }
+                    >
+                      {data[menuDisclosure]}
+                    </Disclosure.Panel>
+                  </Transition>
                 </>
               )}
             </Disclosure>
