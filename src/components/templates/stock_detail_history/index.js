@@ -5,27 +5,20 @@ import { useParams } from "react-router-dom";
 import { Button, Gap, Input, TextDinamis } from "../../atoms";
 import ChartStock from "../chart";
 import { ToggleInput } from "../../molekuls";
-import {
-  setAutoFill_ann,
-  setFormX_ann,
-  setResetFormX_ann,
+import {setFormX_ANN, setPrediction_ANN, resetPrediction_ANN, setAutoFill_ANN
 } from "../../../config/redux/actions";
 
 const StockDetailHistory = () => {
   const { detailHistory, detailInfo } = useSelector(
     (state) => state.detailReducer
   );
-  const { formX_ann, autoFill_ann } = useSelector(
+  const { formX_ann, autoFill_ann, dataPredictionStockANN } = useSelector(
     (state) => state.predictionReducer
   );
   const dispatch = useDispatch();
   const param = useParams();
   const code = param.code;
   const [isLoading, setIsLoading] = useState(false);
-  const [resultPredict, setResultPredict] = useState("");
-
-  // console.log("auto fill", detailInfo);
-  // console.log("form ann", formX_ann);
   // =========================================================
   const onSubmitPrediction = async () => {
     const model = await tf.loadLayersModel(
@@ -38,7 +31,7 @@ const StockDetailHistory = () => {
       const prediction = model.predict(input);
       // set Result
       prediction.data().then((d) => {
-        setResultPredict(parseFloat(d[0]).toFixed(2));
+        dispatch(setPrediction_ANN(parseFloat(d[0]).toFixed(2)));
       });
     } else {
       alert("Kolom tidak boleh kosong!");
@@ -47,16 +40,16 @@ const StockDetailHistory = () => {
   // =========================================================
   const toggleOnClick = () => {
     if (autoFill_ann === false) {
-      dispatch(setResetFormX_ann(code));
-      dispatch(setFormX_ann("open", detailInfo.result["open"]));
-      dispatch(setFormX_ann("high", detailInfo.result["high"]));
-      dispatch(setFormX_ann("low", detailInfo.result["low"]));
+      dispatch(setFormX_ANN('code', code));
+      dispatch(setFormX_ANN("open", detailInfo.result["open"]));
+      dispatch(setFormX_ANN("high", detailInfo.result["high"]));
+      dispatch(setFormX_ANN("low", detailInfo.result["low"]));
       setIsLoading(false);
-      dispatch(setAutoFill_ann(autoFill_ann));
+      dispatch(setAutoFill_ANN(autoFill_ann));
     } else {
-      setResultPredict("");
+      dispatch(resetPrediction_ANN())
       setIsLoading(false);
-      dispatch(setAutoFill_ann(autoFill_ann));
+      dispatch(setAutoFill_ANN(autoFill_ann));
     }
   };
 
@@ -98,9 +91,9 @@ const StockDetailHistory = () => {
           onChange={(e) => {
             const value = +e.target.value;
             typeof value === "number" && value > 0
-              ? dispatch(setFormX_ann("open", value))
-              : dispatch(setFormX_ann("open", ""));
-            dispatch(setFormX_ann("code", code));
+              ? dispatch(setFormX_ANN("open", value))
+              : dispatch(setFormX_ANN("open", ""));
+            dispatch(setFormX_ANN("code", code));
           }}
         />
         <Gap className={`h-1`} />
@@ -113,8 +106,8 @@ const StockDetailHistory = () => {
           onChange={(e) => {
             const value = +e.target.value;
             typeof value === "number" && value > 0
-              ? dispatch(setFormX_ann("high", value))
-              : dispatch(setFormX_ann("high", ""));
+              ? dispatch(setFormX_ANN("high", value))
+              : dispatch(setFormX_ANN("high", ""));
           }}
         />
         <Gap className={`h-1`} />
@@ -127,8 +120,8 @@ const StockDetailHistory = () => {
           onChange={(e) => {
             const value = +e.target.value;
             typeof value === "number" && value > 0
-              ? dispatch(setFormX_ann("low", value))
-              : dispatch(setFormX_ann("low", ""));
+              ? dispatch(setFormX_ANN("low", value))
+              : dispatch(setFormX_ANN("low", ""));
           }}
         />
         <Gap className={`h-3`} />
@@ -138,11 +131,11 @@ const StockDetailHistory = () => {
           onClick={onSubmitPrediction}
         />
         <Gap className={"h-3"} />
-        {resultPredict !== "" ? (
+        {dataPredictionStockANN !== "" ? (
           <div>
             <TextDinamis title={"Prediksi Harga Close (IDR)"} semibold={true} />
             <div className="text-center py-1 border-2 rounded">
-              <TextDinamis textAlign={"text-center"} title={resultPredict} />
+              <TextDinamis textAlign={"text-center"} title={dataPredictionStockANN} />
             </div>
           </div>
         ) : isLoading ? (

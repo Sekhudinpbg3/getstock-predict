@@ -15,7 +15,7 @@ const initialStatePredictionStock = {
     high: "",
     low: "",
   },
-  // dataPredictionStockANN: "",
+  dataPredictionStockANN: "",
   autoFill_ann: false,
 };
 
@@ -23,7 +23,7 @@ const initialStatePredictionStock = {
 export default (state = initialStatePredictionStock, action) => {
   switch (action.type) {
     // LINEAR MODEL
-    case "SET_FORM_INPUT":
+    case "SET_FORM_LR":
       return {
         ...state,
         formX: {
@@ -31,7 +31,7 @@ export default (state = initialStatePredictionStock, action) => {
           [action.formType]: action.formValue,
         },
       };
-    case "SET_PREDICTION_RESULT":
+    case "SET_PREDICTION_LR":
       return {
         ...state,
         dataPredictionStockLR: {
@@ -40,19 +40,19 @@ export default (state = initialStatePredictionStock, action) => {
           Pesan: action.payload.message,
         },
       };
-    case "RESET_ALL_PREDICTION":
+    case "RESET_PREDICTION_LR":
       return {
         ...state,
-        dataPredictionStockLR: ""
+        dataPredictionStockLR: "",
       };
-    case "SET_AUTO_FILL":
+    case "SET_AUTOFILL_LR":
       return {
         ...state,
         autoFill: action.payload,
       };
 
     // ANN MODEL
-    case "SET_FORM_INPUT_ANN":
+    case "SET_FORM_ANN":
       return {
         ...state,
         formX_ann: {
@@ -60,29 +60,43 @@ export default (state = initialStatePredictionStock, action) => {
           [action.formType]: action.formValue,
         },
       };
-    case "SET_PREDICTION_RESULT_ANN":
+    case "SET_PREDICTION_ANN":
       return {
         ...state,
-        dataPredictionStockANN: {
-          "Prediksi Harga Close": action.payload,
-          MAE: "ini mae",
-          Pesan: "ini message",
-        },
+        dataPredictionStockANN: action.payload
       };
-    case "RESET_FORM_ANN":
+    case "RESET_PREDICTION_ANN":
       return {
         ...state,
-        formX_ann: {
-          code: action.payload,
+        dataPredictionStockANN: "",
+      };
+    case "SET_AUTOFILL_ANN":
+      return {
+        ...state,
+        autoFill_ann: action.payload,
+      };
+
+    // RESET ALL PREDICTION DATA LR AND ANN
+    case "HARD_RESET_ALL_PREDICTION":
+      return {
+        ...state,
+        formX: {
+          code: "",
           open: "",
           high: "",
           low: "",
         },
-      };
-    case "SET_AUTO_FILL_ANN":
-      return {
-        ...state,
-        autoFill_ann: action.payload,
+        dataPredictionStockLR: "",
+        autoFill: false,
+        // ANN MODEL
+        formX_ann: {
+          code: "",
+          open: "",
+          high: "",
+          low: "",
+        },
+        dataPredictionStockANN: "",
+        autoFill_ann: false,
       };
 
     // DEFAULT

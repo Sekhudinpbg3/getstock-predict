@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { Button, Gap, NavigateDetail } from "../../components";
 import {
-  setAutoFill,
   setDetailBalanceSheet,
   setDetailCashflow,
   setDetailEarnings,
   setDetailHistory,
   setDetailInfo,
   setResetAllDetail,
-  setResetAllPrediction,
+  resetDataPrediction
 } from "../../config/redux/actions";
 
 const DetailStock = () => {
@@ -62,8 +61,7 @@ const DetailStock = () => {
         height={`py-0.5`}
         onClick={() => {
           dispatch(setResetAllDetail());
-          dispatch(setResetAllPrediction());
-          dispatch(setAutoFill(true));
+          dispatch(resetDataPrediction());
           history(`../stock`);
         }}
       />

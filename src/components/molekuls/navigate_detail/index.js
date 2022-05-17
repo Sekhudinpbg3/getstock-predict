@@ -7,7 +7,6 @@ const NavigateDetail = ({
   linkInfo,
   linkHistory,
   linkFinancials,
-  code,
 }) => {
   const [info, setInfo] = useState(1);
   const [history, setHistory] = useState(0);

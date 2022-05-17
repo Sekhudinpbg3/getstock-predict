@@ -1,12 +1,11 @@
 import axios from "axios";
 
-
 // LINEAR MODEL
-export const setFormX = (formType, formValue) => {
-  return { type: "SET_FORM_INPUT", formType, formValue };
+export const setFormX_LR = (formType, formValue) => {
+  return { type: "SET_FORM_LR", formType, formValue };
 };
 
-export const setDataPredictionStockLR = (form) => {
+export const setPrediction_LR = (form) => {
   const data = new FormData();
   data.append("code", form.code);
   data.append("open", form.open);
@@ -23,7 +22,7 @@ export const setDataPredictionStockLR = (form) => {
         const responseAPI = response.data;
 
         dispatch({
-          type: "SET_PREDICTION_RESULT",
+          type: "SET_PREDICTION_LR",
           payload: responseAPI,
         });
       })
@@ -33,46 +32,63 @@ export const setDataPredictionStockLR = (form) => {
   };
 };
 
-export const setResetAllPrediction = (code) => {
+export const resetPrediction_LR = (code) => {
   return (dispatch) => {
     dispatch({
-      type: "RESET_ALL_PREDICTION",
-      payload: code,
+      type: "RESET_PREDICTION_LR",
     });
   };
 };
 
-export const setAutoFill = (autoFill) => {
+export const setAutoFill_LR = (autoFill) => {
   return (dispatch) => {
     let value = "";
     autoFill === true ? (value = false) : (value = true);
     dispatch({
-      type: "SET_AUTO_FILL",
+      type: "SET_AUTOFILL_LR",
       payload: value,
     });
   };
 };
 
 // ANN MODEL
-export const setFormX_ann = (formType, formValue) => {
-  return { type: "SET_FORM_INPUT_ANN", formType, formValue };
+export const setFormX_ANN = (formType, formValue) => {
+  return { type: "SET_FORM_ANN", formType, formValue };
 };
 
-export const setResetFormX_ann = (code) => {
+export const setPrediction_ANN = (value) => {
   return (dispatch) => {
     dispatch({
-      type: "RESET_FORM_ANN",
-      payload: code,
+      type: "SET_PREDICTION_ANN",
+      payload: value,
     });
   };
 };
 
-export const setAutoFill_ann = (autoFill) => {
+export const resetPrediction_ANN = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "RESET_PREDICTION_ANN",
+    });
+  };
+};
+
+export const setAutoFill_ANN = (autoFill) => {
   return (dispatch) => {
     let value = "";
     autoFill === true ? (value = false) : (value = true);
     dispatch({
-      type: "SET_AUTO_FILL_ANN",
+      type: "SET_AUTOFILL_ANN",
+      payload: value,
+    });
+  };
+};
+
+// HARD RESET DATA PREDICTION
+export const resetDataPrediction = (value) => {
+  return (dispatch) => {
+    dispatch({
+      type: "HARD_RESET_ALL_PREDICTION",
       payload: value,
     });
   };
