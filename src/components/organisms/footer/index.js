@@ -2,8 +2,34 @@ import React from "react";
 import { Github, Instagram, Linkedin } from "../../../assets/icons";
 import { DataImage } from "../../../assets/images";
 import { Gap, IconAhref, Label, Link, TextDinamis } from "../../atoms";
+import { DialogModal } from "../../molekuls";
+import { confirmAlert } from "react-confirm-alert";
 
 const Footer = () => {
+  const menuNotFoundHandler = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div>
+            <DialogModal
+              title="Peringatan"
+              message="Untuk saat ini menu yang Anda tuju belum tersedia."
+              buttons={{
+                button1: {
+                  type: "primary",
+                  title: "OK",
+                  onClick: ()=>{
+                    onClose()
+                  }
+                },
+              }}
+            />
+          </div>
+        );
+      },
+    });
+  };
+
   return (
     <div
       className={`px-3 py-1.5 sm:px-5 md:px-10 md:py-2 lg:px-16 xl:px-24 xl:py-2.5 2xl:px-36 2xl:py-3 w-full bg-white drop-shadow-lg border-2 border-gray-100 `}
@@ -22,6 +48,7 @@ const Footer = () => {
             <div className={`text-center`}>
               <IconAhref
                 src={DataImage}
+                onClick={menuNotFoundHandler}
                 className={`w-40 h-40 -mt-5 bg-white`}
               />
               <Label
@@ -68,6 +95,7 @@ const Footer = () => {
               <IconAhref
                 src={Github}
                 alt={`Github`}
+                href={"https://github.com/Sekhudinpbg3"}
                 className={`w-8 h-8 mx-1 bg-white`}
                 hover={`lg:hover:rotate-12`}
                 wdLoader={`h-1 w-1`}
@@ -76,6 +104,7 @@ const Footer = () => {
               <IconAhref
                 src={Instagram}
                 alt={`Instagram`}
+                href={`https://www.instagram.com/sekhudin_y`}
                 className={`w-8 h-8 mx-1`}
                 hover={`lg:hover:rotate-12`}
                 wdLoader={`h-1 w-1`}
@@ -84,6 +113,7 @@ const Footer = () => {
               <IconAhref
                 src={Linkedin}
                 alt={`Linkedin`}
+                href={"https://www.linkedin.com/in/sekhudin-pbg3-714705219/"}
                 className={`w-8 h-8 mx-1 bg-white`}
                 hover={`lg:hover:rotate-12`}
                 wdLoader={`h-1 w-1`}
@@ -98,7 +128,7 @@ const Footer = () => {
         className={`flex justify-center my-1 py-1 border-t-0 border-gray-300 md:my-2 md:py-2 md:border-t-2`}
       >
         <Link
-          title={`©2022 Sekhudin | `}
+          title={`©2022, Tim GetStock | `}
           textLink={`getStock`}
           href={`/`}
           textSize={"text-xs md:text-sm "}

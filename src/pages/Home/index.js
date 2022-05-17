@@ -11,6 +11,7 @@ const Home = () => {
           className={`font-lexend text-xl md:text-2xl xl:text-3xl font-bold text-green-500`}
         />
         <TextDinamis
+          textAlign={"text-center"}
           semibold={true}
           title={`This page is a simple implementation of what we learned during our
           independent study activities.`}
@@ -26,13 +27,13 @@ const Home = () => {
 
       <div className={`flex justify-center`}>
         <div className={`block md:flex md:justify-center md:items-center`}>
-            <CardIcon
-              src={Stockimage}
-              className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
-              title={`Stock Forecasting`}
-              href={`/main/stock`}
-              navigate={`/main/stock`}
-            />
+          <CardIcon
+            src={Stockimage}
+            className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
+            title={`Stock Forecasting`}
+            href={`/main/stock`}
+            navigate={`/main/stock`}
+          />
           <div className={`text-center`}>
             <Label
               title={`or `}

@@ -10,13 +10,18 @@ const IconAhref = ({
   hover,
   wdLoader,
   spaceXLoader,
+  onClick,
 }) => {
   const customClassName = className ? className : "w-10 h-10 bg-white";
   const isHovers = hover ? hover : "lg:hover:p-0.5";
 
   return (
     <div className={`${customClassName}`}>
-      <a href={href ? href : `#`} target={`_blank`}>
+      <a
+        href={href ? href : onClick ? null : `#`}
+        target={onClick ? "" : `_blank`}
+        onClick={onClick ? onClick : null}
+      >
         {src ? (
           src !== "" ? (
             <div className={`${isHovers}`}>

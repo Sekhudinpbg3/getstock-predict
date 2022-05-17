@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+// LINEAR MODEL
 export const setFormX = (formType, formValue) => {
   return { type: "SET_FORM_INPUT", formType, formValue };
 };
@@ -46,6 +48,31 @@ export const setAutoFill = (autoFill) => {
     autoFill === true ? (value = false) : (value = true);
     dispatch({
       type: "SET_AUTO_FILL",
+      payload: value,
+    });
+  };
+};
+
+// ANN MODEL
+export const setFormX_ann = (formType, formValue) => {
+  return { type: "SET_FORM_INPUT_ANN", formType, formValue };
+};
+
+export const setResetFormX_ann = (code) => {
+  return (dispatch) => {
+    dispatch({
+      type: "RESET_FORM_ANN",
+      payload: code,
+    });
+  };
+};
+
+export const setAutoFill_ann = (autoFill) => {
+  return (dispatch) => {
+    let value = "";
+    autoFill === true ? (value = false) : (value = true);
+    dispatch({
+      type: "SET_AUTO_FILL_ANN",
       payload: value,
     });
   };

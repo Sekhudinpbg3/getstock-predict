@@ -1,5 +1,5 @@
 import React from "react";
-import { TextDinamis } from "../../atoms";
+import {TextDinamis } from "../../atoms";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
@@ -13,7 +13,7 @@ const ChartStock = ({ data, title, subTitle }) => {
     return setArray;
   };
 
-  const dataChart = setData(data);
+  const dataChart = data? setData(data):[1]
   const options = {
     title: {
       text: title ? title : "your-title",

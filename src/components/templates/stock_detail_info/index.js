@@ -135,8 +135,15 @@ const StockDetailInfo = () => {
       <Gap className={`h-2`} />
       <Label title={"Prediksi"} labelBold />
       <DisclosureCustom listData={disclosurePrediction} />
+      <Gap className={"h-5"} />
 
       <div className={`w-3/4 sm:w-1/2 lg:w-1/3 px-4 py-2`}>
+        <TextDinamis
+          title="Prediksi Saham Menggunakan Linear Model"
+          textColor={"text-green-500"}
+          semibold={true}
+        />
+        <Gap className={"h-4"} />
         <ToggleInput
           disabled={detailInfo ? false : true}
           titleOnOff={["auto fill", "Manual"]}
@@ -193,7 +200,10 @@ const StockDetailInfo = () => {
         {dataPredictionStockLR ? (
           Object.keys(dataPredictionStockLR).map((data, index) => (
             <div key={index}>
-              <TextDinamis title={data} semibold={index === 0 ? true : false} />
+              <TextDinamis
+                title={index === 0 ? "Prediksi Harga Close (IDR)" : data}
+                semibold={index === 0 ? true : false}
+              />
               <div className="text-center py-1 border-2 rounded">
                 <TextDinamis
                   textColor={index === 0 ? "text-green-500" : ""}

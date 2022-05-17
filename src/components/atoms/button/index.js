@@ -10,7 +10,7 @@ const Button = ({
   ...props
 }) => {
   const btn_style = primary
-    ? "text-white bg-green-500 lg:hover:opacity-90 active:bg-green-600"
+    ? "text-white bg-green-500 lg:hover:opacity-90 active:bg-green-600 border-2 border-green-500"
     : "text-green-500 bg-white lg:hover:bg-gray-50 active:bg-gray-100 border-2 border-green-500 ";
 
   const btn_disable = disabled
@@ -18,7 +18,7 @@ const Button = ({
     : null;
   const font = fontFamily ? fontFamily : "font-raleway";
   const btnWidth = width ? width : "w-full";
-  const btnHeight = height ? height : "py-1.5";
+  const btnHeight = height ? height : "py-1";
 
   return (
     <button

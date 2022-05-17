@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import { Routers, store } from "../config";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { favicon, favicon16, favicon32, apple_touch } from "../assets";
-// import { ErrorDialogue } from "../components";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
           {/* <link rel="manifest" href='../assets/meta/site.webmanifest' /> */}
         </Helmet>
         <Routers />
-        {/* <ErrorDialogue/> */}
       </HelmetProvider>
     </Provider>
   );

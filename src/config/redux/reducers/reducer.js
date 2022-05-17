@@ -3,10 +3,9 @@ import detailReducer from "./detailReducer";
 import globalReducer from "./globalReducer";
 import homeReducer from "./homeReducer";
 import predictionReducer from './predictionReducer'
-import alertModalReducer from './alertModalReducer'
 
 const reducer = combineReducers({
-  globalReducer, homeReducer, detailReducer, predictionReducer, alertModalReducer
+  globalReducer, homeReducer, detailReducer, predictionReducer,
 });
 
 export default reducer;
