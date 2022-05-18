@@ -2,10 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Gap, TextDinamis } from "../../atoms";
-import { DisclosureCustom } from "../../organisms";
-import BalanceChart from "../balance";
-import ChartCashflow from "../cashflow";
-import ChartEarnings from "../earnings";
+import {
+  ChartBalance,
+  ChartCashflow,
+  ChartEarnings,
+  DisclosureCustom,
+} from "../../organisms";
 
 const StockDetailFinancials = () => {
   const { detailBalanceSheet, detailEarnings, detailCashFlow } = useSelector(
@@ -43,7 +45,7 @@ const StockDetailFinancials = () => {
     <div>
       <TextDinamis title={`Balance Sheet ${code}`} semibold wfull={true} />
       <Gap className={"h-5"} />
-      <BalanceChart
+      <ChartBalance
         data={detailBalanceSheet}
         title={`Balance Sheet ${code}`}
         subTitle={`Source: yahoo-finance`}

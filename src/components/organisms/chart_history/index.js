@@ -4,7 +4,7 @@ import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 
-const ChartStock = ({ data, title, subTitle }) => {
+const ChartHistory = ({ data, title, subTitle }) => {
   // valid period 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
   const setData = (theData) => {
     let setArray = [];
@@ -73,4 +73,4 @@ const ChartStock = ({ data, title, subTitle }) => {
   );
 };
 
-export default ChartStock;
+export default ChartHistory;

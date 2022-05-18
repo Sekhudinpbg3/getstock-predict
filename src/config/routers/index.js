@@ -10,7 +10,7 @@ import {
   DetailStock,
   Home,
   MainApp,
-  RecomendSystem,
+  ComputerVision,
   StockForecast,
 } from "../../pages";
 import {
@@ -45,7 +45,7 @@ const Routers = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path={`main`} element={<MainApp />}>
-          <Route path={"recsys"} element={<RecomendSystem />} />
+          <Route path={"comvis"} element={<ComputerVision />} />
           <Route path={`stock`} element={<StockForecast />} />
           <Route path={`stock/detail`} element={<DetailStock />}>
             <Route path={`info/:code`} element={<StockDetailInfo />} />

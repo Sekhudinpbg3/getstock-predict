@@ -45,8 +45,8 @@ const Home = () => {
               src={RecomendSystem}
               className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
               title={`Recomend System`}
-              href={`/main/recsys`}
-              navigate={`/main/recsys`}
+              href={`/main/comvis`}
+              navigate={`/main/comvis`}
             />
           </div>
         </div>

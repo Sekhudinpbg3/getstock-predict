@@ -3,10 +3,14 @@ import * as tf from "@tensorflow/tfjs";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button, Gap, Input, TextDinamis } from "../../atoms";
-import ChartStock from "../chart";
 import { ToggleInput } from "../../molekuls";
-import {setFormX_ANN, setPrediction_ANN, resetPrediction_ANN, setAutoFill_ANN
+import {
+  setFormX_ANN,
+  setPrediction_ANN,
+  resetPrediction_ANN,
+  setAutoFill_ANN,
 } from "../../../config/redux/actions";
+import { ChartHistory } from "../../organisms";
 
 const StockDetailHistory = () => {
   const { detailHistory, detailInfo } = useSelector(
@@ -40,14 +44,14 @@ const StockDetailHistory = () => {
   // =========================================================
   const toggleOnClick = () => {
     if (autoFill_ann === false) {
-      dispatch(setFormX_ANN('code', code));
+      dispatch(setFormX_ANN("code", code));
       dispatch(setFormX_ANN("open", detailInfo.result["open"]));
       dispatch(setFormX_ANN("high", detailInfo.result["high"]));
       dispatch(setFormX_ANN("low", detailInfo.result["low"]));
       setIsLoading(false);
       dispatch(setAutoFill_ANN(autoFill_ann));
     } else {
-      dispatch(resetPrediction_ANN())
+      dispatch(resetPrediction_ANN());
       setIsLoading(false);
       dispatch(setAutoFill_ANN(autoFill_ann));
     }
@@ -61,7 +65,7 @@ const StockDetailHistory = () => {
         wfull={true}
       />
       <Gap className={"h-5"} />
-      <ChartStock
+      <ChartHistory
         data={detailHistory["Close"]}
         title={code}
         subTitle={`Source: yahoo-finance`}
@@ -135,7 +139,10 @@ const StockDetailHistory = () => {
           <div>
             <TextDinamis title={"Prediksi Harga Close (IDR)"} semibold={true} />
             <div className="text-center py-1 border-2 rounded">
-              <TextDinamis textAlign={"text-center"} title={dataPredictionStockANN} />
+              <TextDinamis
+                textAlign={"text-center"}
+                title={dataPredictionStockANN}
+              />
             </div>
           </div>
         ) : isLoading ? (

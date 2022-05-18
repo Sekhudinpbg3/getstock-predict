@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Gap, Label } from "../../atoms";
 
-const NavigateDetail = ({
-  title,
-  linkInfo,
-  linkHistory,
-  linkFinancials,
-}) => {
+const NavigateDetail = ({ title, linkInfo, linkHistory, linkFinancials }) => {
   const [info, setInfo] = useState(1);
   const [history, setHistory] = useState(0);
   const [financials, setFinancials] = useState(0);

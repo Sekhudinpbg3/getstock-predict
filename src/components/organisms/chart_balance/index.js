@@ -4,7 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 import { TextDinamis } from "../../atoms";
 
-const BalanceChart = ({ data, title, subTitle }) => {
+const ChartBalance = ({ data, title, subTitle }) => {
   const year = moment().year();
   const quarter = [`Q1${+year}`, `Q2${+year}`, `Q3${+year}`, `Q4${+year}`];
   const dataAset = data ? data["Aset"] : [1];
@@ -91,4 +91,4 @@ const BalanceChart = ({ data, title, subTitle }) => {
   );
 };
 
-export default BalanceChart;
+export default ChartBalance;
