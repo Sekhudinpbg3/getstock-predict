@@ -44,7 +44,7 @@ const Home = () => {
             <CardIcon
               src={RecomendSystem}
               className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
-              title={`Recomend System`}
+              title={`Computer Vision`}
               href={`/main/comvis`}
               navigate={`/main/comvis`}
             />

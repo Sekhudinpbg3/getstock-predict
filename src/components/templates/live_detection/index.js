@@ -6,18 +6,66 @@ import React, {
   useRef,
   useState,
 } from "react";
+// import * as tf from "@tensorflow/tfjs";
+import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import { CheckIcon, MiniChevronDown, MiniChevronUp } from "../../../assets";
-import { Button, Gap, TextDinamis } from "../../atoms";
+import { Button, Gap, IconAhref, TextDinamis } from "../../atoms";
+import { drawRect } from "./utilities";
 
 const LiveDetection = () => {
   const [devices, setDevices] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState();
-  const webcamRef = useRef(null);
   const [capture, setCapture] = useState(null);
 
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  // =========================================
+  const runCoco = async () => {
+    const net = await cocossd.load();
+    // console.log("Handpose model loaded.");
+    setInterval(() => {
+      detect(net);
+    }, 10);
+  };
+
+  const detect = async (net) => {
+    // Check data is available
+    if (
+      typeof webcamRef.current !== "undefined" &&
+      webcamRef.current !== null &&
+      webcamRef.current.video.readyState === 4
+    ) {
+      // Get Video Properties
+      const video = webcamRef.current.video;
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
+
+      // Set video width
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
+
+      // Set canvas height and width
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
+
+      // Make Detections
+      const obj = await net.detect(video);
+
+      // Draw mesh
+      const ctx = canvasRef.current.getContext("2d");
+      drawRect(obj, ctx);
+    }
+  };
+
+  useEffect(() => {
+    runCoco();
+  }, []);
+  // =========================================
+
   const getCapture = () => {
-    if (webcamRef.current!==null) {
+    if (webcamRef.current !== null) {
       const capSrc = webcamRef.current.getScreenshot();
       setCapture(capSrc);
     }
@@ -29,14 +77,17 @@ const LiveDetection = () => {
       setDevices(mediaDevices.filter(({ kind }) => kind === "videoinput")),
     [setDevices]
   );
-  console.log("CAPTURED", capture);
-  console.log("REF", webcamRef);
+  //   console.log("CAPTURED", capture);
+  //   console.log("CAMERAS", devices);
+  //   console.log("REF", webcamRef);
   useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then(handleDevices);
   }, [handleDevices]);
 
   return (
     <div>
+      <TextDinamis title="Live Object Detection Dengan Coco Model" semibold />
+      <Gap className="h-2" />
       <div className="w-60 relative">
         <Listbox value={selectedDevice} onChange={setSelectedDevice}>
           {({ open }) => (
@@ -103,36 +154,50 @@ const LiveDetection = () => {
 
       <div>
         {selectedDevice ? (
-          <Webcam
-            className="w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem] bg-gray-100 rounded"
-            audio={false}
-            height={220}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={{ deviceId: selectedDevice.deviceId }}
-          />
+          <div className="relative">
+            <Webcam
+              className="w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem] bg-gray-100 rounded"
+              audio={false}
+              height={220}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={{ deviceId: selectedDevice.deviceId }}
+            />
+            <canvas
+              ref={canvasRef}
+              className={
+                "absolute mx-auto top-0 left-0 right-0 text-center z-20 w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem]"
+              }
+            />
+          </div>
         ) : (
           <div className="flex justify-center items-center w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem] bg-gray-100 rounded">
             <TextDinamis title="Silakan memilih camera anda..." />
           </div>
         )}
-        <div className="flex justify-center space-x-2 items-center w-full bg-green-100 py-1">
-          <div>
-            <Button
-              primary={true}
-              title="start"
-              width="px-2"
-              height={"py-0.5"}
-            />
-          </div>
+        <div className="flex justify-center space-x-2 items-center w-full py-1">
           <div>
             <Button
               title="capture"
+              primary
               width="px-2"
               height={"py-0.5"}
               onClick={getCapture}
             />
           </div>
+        </div>
+        <Gap className="h-5" />
+
+        <TextDinamis title="Hasil Capture Webcam" semibold />
+        <Gap className="h-2" />
+        <div className="w-full h-[20rem] lg:h-[25rem] flex justify-center items-center">
+          {capture ? (
+            <IconAhref
+              src={capture}
+              alt="no image taken"
+              className="w-full h-full"
+            />
+          ) : null}
         </div>
       </div>
     </div>
