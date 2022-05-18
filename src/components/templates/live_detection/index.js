@@ -77,7 +77,7 @@ const LiveDetection = () => {
       setDevices(mediaDevices.filter(({ kind }) => kind === "videoinput")),
     [setDevices]
   );
-  //   console.log("CAPTURED", capture);
+  // console.log("CAPTURED", capture);
   //   console.log("CAMERAS", devices);
   //   console.log("REF", webcamRef);
   useEffect(() => {
@@ -111,7 +111,7 @@ const LiveDetection = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className="mt-1 rounded py-1.5 bg-white shadow-md absolute z-10">
+                <Listbox.Options className="mt-1 rounded py-1.5 bg-white shadow-md absolute z-20">
                   {devices ? (
                     Object.keys(devices).map((device, index) => (
                       <Listbox.Option
@@ -154,7 +154,7 @@ const LiveDetection = () => {
 
       <div>
         {selectedDevice ? (
-          <div className="relative">
+          <div className="relative rounded">
             <Webcam
               className="w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem] bg-gray-100 rounded"
               audio={false}
@@ -166,7 +166,7 @@ const LiveDetection = () => {
             <canvas
               ref={canvasRef}
               className={
-                "absolute mx-auto top-0 left-0 right-0 text-center z-20 w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem]"
+                "absolute mx-auto top-0 left-0 right-0 text-center w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem] z-10"
               }
             />
           </div>
@@ -175,6 +175,9 @@ const LiveDetection = () => {
             <TextDinamis title="Silakan memilih camera anda..." />
           </div>
         )}
+      </div>
+
+      <div>
         <div className="flex justify-center space-x-2 items-center w-full py-1">
           <div>
             <Button
@@ -187,18 +190,18 @@ const LiveDetection = () => {
           </div>
         </div>
         <Gap className="h-5" />
-
         <TextDinamis title="Hasil Capture Webcam" semibold />
         <Gap className="h-2" />
-        <div className="w-full h-[20rem] lg:h-[25rem] flex justify-center items-center">
+        <div className="flex justify-center items-center w-full bg-green-100 rounded">
           {capture ? (
-            <IconAhref
+            <img
               src={capture}
-              alt="no image taken"
-              className="w-full h-full"
+              alt="capture"
+              className="h-[20rem] lg:h-[25rem]"
             />
           ) : null}
         </div>
+        <Gap />
       </div>
     </div>
   );
