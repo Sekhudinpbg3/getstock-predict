@@ -1,5 +1,6 @@
 import React from "react";
 import Label from "../label";
+import './main.css'
 
 const Input = ({ title, disabled, readOnly, ...rest }) => {
   return (

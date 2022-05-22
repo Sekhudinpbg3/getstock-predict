@@ -10,7 +10,7 @@ import React, {
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import { CheckIcon, MiniChevronDown, MiniChevronUp } from "../../../assets";
-import { Button, Gap, IconAhref, TextDinamis } from "../../atoms";
+import { Button, Gap, TextDinamis } from "../../atoms";
 import { drawRect } from "./utilities";
 
 const LiveDetection = () => {
@@ -24,7 +24,7 @@ const LiveDetection = () => {
   // =========================================
   const runCoco = async () => {
     const net = await cocossd.load();
-    // console.log("Handpose model loaded.");
+    alert("Model has loaded!");
     setInterval(() => {
       detect(net);
     }, 10);
@@ -69,7 +69,6 @@ const LiveDetection = () => {
       const capSrc = webcamRef.current.getScreenshot();
       setCapture(capSrc);
     }
-    console.log("CAPTURED", capture);
   };
 
   const handleDevices = useCallback(
