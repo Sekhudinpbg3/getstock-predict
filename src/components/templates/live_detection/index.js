@@ -12,11 +12,13 @@ import Webcam from "react-webcam";
 import { CheckIcon, MiniChevronDown, MiniChevronUp } from "../../../assets";
 import { Button, Gap, TextDinamis } from "../../atoms";
 import { drawRect } from "./utilities";
+import { notificationAlert } from "../../../utils/custom-alert";
 
 const LiveDetection = () => {
   const [devices, setDevices] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState();
   const [capture, setCapture] = useState(null);
+  const [modelLoaded, setModelLoaded] = useState(false);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -24,7 +26,11 @@ const LiveDetection = () => {
   // =========================================
   const runCoco = async () => {
     const net = await cocossd.load();
-    alert("Model has loaded!");
+    notificationAlert(
+      "Notification",
+      "Model telah berhasil diload, klik 'OK' untuk melanjutkan."
+    );
+    setModelLoaded(true);
     setInterval(() => {
       detect(net);
     }, 10);
@@ -61,7 +67,7 @@ const LiveDetection = () => {
 
   useEffect(() => {
     runCoco();
-  }, []);
+  });
   // =========================================
 
   const getCapture = () => {
@@ -171,7 +177,13 @@ const LiveDetection = () => {
           </div>
         ) : (
           <div className="flex justify-center items-center w-full h-[20rem] sm:h-[25rem] lg:h-[30rem] xl:h-[35rem] bg-gray-100 rounded">
-            <TextDinamis title="Silakan memilih camera anda..." />
+            <TextDinamis
+              title={
+                modelLoaded
+                  ? "Silahkan pilih kamera ..."
+                  : "Tunggu beberapa saat, Kami sedang berupaya menyiapkan model ..."
+              }
+            />
           </div>
         )}
       </div>

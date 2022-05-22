@@ -2,34 +2,15 @@ import React from "react";
 import { Github, Instagram, Linkedin } from "../../../assets/icons";
 import { DataImage } from "../../../assets/images";
 import { Gap, IconAhref, Label, Link, TextDinamis } from "../../atoms";
-import { DialogModal } from "../../molekuls";
-import { confirmAlert } from "react-confirm-alert";
+import { notificationAlert } from "../../../utils/custom-alert";
 
 const Footer = () => {
-  const menuNotFoundHandler = () => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
-        return (
-          <div>
-            <DialogModal
-              title="Peringatan"
-              message="Untuk saat ini menu yang Anda tuju belum tersedia."
-              buttons={{
-                button1: {
-                  type: "primary",
-                  title: "OK",
-                  onClick: ()=>{
-                    onClose()
-                  }
-                },
-              }}
-            />
-          </div>
-        );
-      },
-    });
-  };
-
+  const handleClick=()=>{
+    notificationAlert(
+      "Pemberitahuan",
+      "Untuk saat ini menu yang Anda tuju belum tersedia."
+    )
+  }
   return (
     <div
       className={`px-3 py-1.5 sm:px-5 md:px-10 md:py-2 lg:px-16 xl:px-24 xl:py-2.5 2xl:px-36 2xl:py-3 w-full bg-white drop-shadow-lg border-2 border-gray-100 `}
@@ -47,8 +28,9 @@ const Footer = () => {
             />
             <div className={`text-center`}>
               <IconAhref
+              href={''}
                 src={DataImage}
-                onClick={menuNotFoundHandler}
+                onClick={handleClick}
                 className={`w-40 h-40 -mt-5 bg-white`}
               />
               <Label
