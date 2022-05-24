@@ -10,11 +10,14 @@ import { useParams } from "react-router-dom";
 import { Button, Gap, IconAhref, Input, Label, TextDinamis } from "../../atoms";
 import { ToggleInput } from "../../molekuls";
 import { DisclosureCustom } from "../../organisms";
+import { notificationAlert } from "../../../utils/custom-alert";
 
 const StockDetailInfo = () => {
   const dispatch = useDispatch();
   const { detailInfo } = useSelector((state) => state.detailReducer);
-  const {formX, dataPredictionStockLR, autoFill} = useSelector((state) => state.predictionReducer);
+  const { formX, dataPredictionStockLR, autoFill } = useSelector(
+    (state) => state.predictionReducer
+  );
   // Variabel untuk data prediksi
   const param = useParams();
   const code = param.code;
@@ -96,7 +99,7 @@ const StockDetailInfo = () => {
       setIsLoading(false);
       dispatch(setAutoFill_LR(autoFill));
     } else {
-      dispatch(resetPrediction_LR())
+      dispatch(resetPrediction_LR());
       setIsLoading(false);
       dispatch(setAutoFill_LR(autoFill));
     }
@@ -106,7 +109,12 @@ const StockDetailInfo = () => {
       dispatch(setPrediction_LR(formX));
       setIsLoading(true);
     } else {
-      alert("Kolom tidak boleh kosong!");
+      notificationAlert(
+        "warning",
+        "Peringatan",
+        "Kolom tidak boleh kosong, semua wajib di isi!",
+        ""
+      );
     }
   };
 

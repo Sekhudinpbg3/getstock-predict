@@ -1,4 +1,5 @@
 import axios from "axios";
+import { notificationAlert } from "../../../utils/custom-alert";
 
 export const setAllStocks = () => {
   const url = `https://getstock-info.herokuapp.com/v1/stocks/getall`;
@@ -14,7 +15,12 @@ export const setAllStocks = () => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat data ALL_STOCKS", err);
+        notificationAlert(
+          "danger",
+          "Request Gagal!",
+          "Beberapa data gagal direquest, untuk kelancaran cobalah refresh halaman.",
+          `${err}`
+        );
       });
   };
 };
@@ -33,8 +39,12 @@ export const setAllIndex = () => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat data ALL_INDEX", err);
-        
+        notificationAlert(
+          "danger",
+          "Request Gagal!",
+          "Beberapa data gagal direquest, untuk kelancaran cobalah refresh halaman.",
+          `${err}`
+        );
       });
   };
 };
@@ -53,7 +63,12 @@ export const setAllSectors = () => {
         });
       })
       .catch((err) => {
-        alert("Gagal Memuat data ALL_SECTORS", err);
+        notificationAlert(
+          "danger",
+          "Request Gagal!",
+          "Beberapa data gagal direquest, untuk kelancaran cobalah refresh halaman.",
+          `${err}`
+        );
       });
   };
 };

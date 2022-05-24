@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Gap, TextDinamis } from "../../atoms";
 
-const DialogModal = ({ type, title, message, buttons }) => {
+const DialogModal = ({ type, title, message, errorLog, buttons }) => {
   const styleType = type
     ? type === "succes"
       ? "text-green-500"
@@ -36,13 +36,19 @@ const DialogModal = ({ type, title, message, buttons }) => {
       };
 
   return (
-    <div
-      className={`${bgType} p-5 rounded shadow-md w-52 lg:w-64 2xl:w-72`}
-    >
+    <div className={`${bgType} p-5 rounded shadow-md w-52 lg:w-64 2xl:w-72`}>
       <TextDinamis title={textTitle} semibold={true} textColor={styleType} />
       <Gap className={`h-1`} />
       <TextDinamis title={textMessage} textLight={true} />
-      <Gap className={`h-5`} />
+      {errorLog ? (
+        <>
+          <Gap className={`h-2`} />
+          <p className="text-xs italic font-sans text-gray-400 font-semibold">
+            {errorLog}
+          </p>
+        </>
+      ) : null}
+      <Gap className={`h-3`} />
       <div
         className={
           Object.keys(allButtons).length > 1

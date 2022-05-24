@@ -11,6 +11,7 @@ import {
   setAutoFill_ANN,
 } from "../../../config/redux/actions";
 import { ChartHistory } from "../../organisms";
+import { notificationAlert } from "../../../utils/custom-alert";
 
 const StockDetailHistory = () => {
   const { detailHistory, detailInfo } = useSelector(
@@ -23,10 +24,11 @@ const StockDetailHistory = () => {
   const param = useParams();
   const code = param.code;
   const [isLoading, setIsLoading] = useState(false);
+  console.log("formX_ann", formX_ann);
   // =========================================================
   const onSubmitPrediction = async () => {
     const model = await tf.loadLayersModel(
-      "https://getstock-predict.vercel.app/model.json"
+      "https://getstock-predict.vercel.app/model/ann/model.json"
     );
     if (formX_ann["open"] && formX_ann["high"] && formX_ann["low"]) {
       setIsLoading(true);
@@ -38,7 +40,12 @@ const StockDetailHistory = () => {
         dispatch(setPrediction_ANN(parseFloat(d[0]).toFixed(2)));
       });
     } else {
-      alert("Kolom tidak boleh kosong!");
+      notificationAlert(
+        "warning",
+        "Peringatan",
+        "Kolom tidak boleh kosong, semua wajib di isi!",
+        ""
+      );
     }
   };
   // =========================================================

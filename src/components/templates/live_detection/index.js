@@ -27,8 +27,10 @@ const LiveDetection = () => {
   const runCoco = async () => {
     const net = await cocossd.load();
     notificationAlert(
+      "succes",
       "Notification",
-      "Model telah berhasil diload, klik 'OK' untuk melanjutkan."
+      "Model telah berhasil diload, klik 'OK' untuk melanjutkan.",
+      null
     );
     setModelLoaded(true);
     setInterval(() => {
