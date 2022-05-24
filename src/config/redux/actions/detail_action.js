@@ -1,4 +1,5 @@
 import axios from "axios";
+import { notificationAlert } from "../../../utils/custom-alert";
 
 export const setDetailInfo = (code) => {
   const url = `https://flask-prediction-api.herokuapp.com/api/getinfo?code=${code}`;
@@ -14,7 +15,7 @@ export const setDetailInfo = (code) => {
         });
       })
       .catch((err) => {
-        console.log("Gagal Memuat detail info, refresh halaman!", err);
+        console.log(err);
       });
   };
 };
@@ -39,7 +40,7 @@ export const setDetailHistory = (code, perioHistory) => {
         });
       })
       .catch((err) => {
-        console.log("Gagal Memuat detail history, refresh halaman!", err);
+        console.log(err);
       });
   };
 };
@@ -58,7 +59,7 @@ export const setDetailBalanceSheet = (code) => {
         });
       })
       .catch((err) => {
-        console.log("Gagal Memuat detail balancesheet, refresh halaman!", err);
+        console.log(err);
       });
   };
 };
@@ -77,7 +78,7 @@ export const setDetailEarnings = (code) => {
         });
       })
       .catch((err) => {
-        console.log("Gagal Memuat detail earnings, refresh halaman!", err);
+        console.log(err);
       });
   };
 };
@@ -96,7 +97,7 @@ export const setDetailCashflow = (code) => {
         });
       })
       .catch((err) => {
-        console.log("Gagal Memuat detail cashflow, refresh halaman!", err);
+        console.log(err);
       });
   };
 };
@@ -105,7 +106,7 @@ export const setPeriodHistory = (value) => {
   return (dispatch) => {
     dispatch({
       type: "SET_PERIOD_HISTORY",
-      payload: value
+      payload: value,
     });
   };
 };

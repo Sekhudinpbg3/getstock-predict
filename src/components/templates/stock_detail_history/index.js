@@ -10,7 +10,7 @@ import {
   resetPrediction_ANN,
   setAutoFill_ANN,
 } from "../../../config/redux/actions";
-import { ChartHistory } from "../../organisms";
+import { ChartHistory, DisclosureCustom } from "../../organisms";
 import { notificationAlert } from "../../../utils/custom-alert";
 
 const StockDetailHistory = () => {
@@ -24,7 +24,6 @@ const StockDetailHistory = () => {
   const param = useParams();
   const code = param.code;
   const [isLoading, setIsLoading] = useState(false);
-  console.log("formX_ann", formX_ann);
   // =========================================================
   const onSubmitPrediction = async () => {
     const model = await tf.loadLayersModel(
@@ -64,6 +63,21 @@ const StockDetailHistory = () => {
     }
   };
 
+  const disclosureData = {
+    Prediksi: (
+      <div className={`px-4 py-2 bg-white rounded shadow`}>
+        <TextDinamis title={"Catatan:"} semibold />
+        <TextDinamis
+          textAlign={"text-justify"}
+          textLight={true}
+          title={
+            "Yang membedakan dengan prediksi sebelumnya adalah metode yang digunakan. Prediksi kali ini menggunakan JST dengan memanfaatkan Library tensorflow. Keunggulan dari metode ini adalah kemampuanya dalam memahami pattern data yang kompleks sehingga hasil prediksi akan lebih baik dari metode prediksi sebelumnya (Regresi Linear)."
+          }
+        />
+      </div>
+    ),
+  };
+
   return (
     <div>
       <TextDinamis
@@ -77,6 +91,8 @@ const StockDetailHistory = () => {
         title={code}
         subTitle={`Source: yahoo-finance`}
       />
+      <Gap className={"h-5"} />
+      <DisclosureCustom listData={disclosureData} />
       <Gap className={"h-5"} />
 
       <div className="w-3/4 sm:w-1/2 lg:w-1/3 px-4 py-2">

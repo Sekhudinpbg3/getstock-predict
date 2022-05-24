@@ -16,8 +16,8 @@ export const setAllStocks = () => {
       })
       .catch((err) => {
         notificationAlert(
-          "danger",
-          "Request Gagal!",
+          "warning",
+          "Peringatan Request",
           "Beberapa data gagal direquest, untuk kelancaran cobalah refresh halaman.",
           `${err}`
         );
@@ -42,7 +42,7 @@ export const setAllIndex = () => {
         notificationAlert(
           "danger",
           "Request Gagal!",
-          "Beberapa data gagal direquest, untuk kelancaran cobalah refresh halaman.",
+          "Beberapa data gagal direquest, cobalah refresh halaman.",
           `${err}`
         );
       });
@@ -66,7 +66,7 @@ export const setAllSectors = () => {
         notificationAlert(
           "danger",
           "Request Gagal!",
-          "Beberapa data gagal direquest, untuk kelancaran cobalah refresh halaman.",
+          "Beberapa data gagal direquest, cobalah refresh halaman.",
           `${err}`
         );
       });

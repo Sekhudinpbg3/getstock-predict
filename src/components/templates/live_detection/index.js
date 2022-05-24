@@ -13,12 +13,13 @@ import { CheckIcon, MiniChevronDown, MiniChevronUp } from "../../../assets";
 import { Button, Gap, TextDinamis } from "../../atoms";
 import { drawRect } from "./utilities";
 import { notificationAlert } from "../../../utils/custom-alert";
+import { useNavigate } from "react-router-dom";
 
 const LiveDetection = () => {
   const [devices, setDevices] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState();
-  const [capture, setCapture] = useState(null);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const history = useNavigate();
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -72,13 +73,6 @@ const LiveDetection = () => {
   });
   // =========================================
 
-  const getCapture = () => {
-    if (webcamRef.current !== null) {
-      const capSrc = webcamRef.current.getScreenshot();
-      setCapture(capSrc);
-    }
-  };
-
   const handleDevices = useCallback(
     (mediaDevices) =>
       setDevices(mediaDevices.filter(({ kind }) => kind === "videoinput")),
@@ -93,7 +87,7 @@ const LiveDetection = () => {
 
   return (
     <div>
-      <TextDinamis title="Live Object Detection Dengan Coco Model" semibold />
+      <TextDinamis title="Live Object Detection Dengan YOLO-5" semibold />
       <Gap className="h-2" />
       <div className="w-60 relative">
         <Listbox value={selectedDevice} onChange={setSelectedDevice}>
@@ -102,7 +96,11 @@ const LiveDetection = () => {
               <Listbox.Button className="flex w-full justify-between items-center bg-gray-50 px-2 py-0.5 rounded border border-gray-400 ">
                 <TextDinamis
                   title={
-                    selectedDevice ? selectedDevice.label : "...choose camera"
+                    selectedDevice
+                      ? selectedDevice.label
+                        ? selectedDevice.label
+                        : "selected"
+                      : "...choose camera"
                   }
                 />
                 {open ? (
@@ -138,7 +136,11 @@ const LiveDetection = () => {
                               <Gap className="h-3 md:h-4 lg:h-5 w-3 md:w-4 lg:w-5" />
                             )}
                             <TextDinamis
-                              title={devices[device].label}
+                              title={
+                                devices[device].label
+                                  ? devices[device].label
+                                  : `Camera ${index}`
+                              }
                               textLight={selected ? false : true}
                               semibold={selected ? true : false}
                             />
@@ -189,32 +191,18 @@ const LiveDetection = () => {
           </div>
         )}
       </div>
-
-      <div>
-        <div className="flex justify-center space-x-2 items-center w-full py-1">
-          <div>
-            <Button
-              title="capture"
-              primary
-              width="px-2"
-              height={"py-0.5"}
-              onClick={getCapture}
-            />
-          </div>
-        </div>
-        <Gap className="h-5" />
-        <TextDinamis title="Hasil Capture Webcam" semibold />
-        <Gap className="h-2" />
-        <div className="flex justify-center items-center w-full bg-green-100 rounded">
-          {capture ? (
-            <img
-              src={capture}
-              alt="capture"
-              className="h-[20rem] lg:h-[25rem]"
-            />
-          ) : null}
-        </div>
+      <div className="w-full py-1">
         <Gap />
+        <div>
+          <Button
+            title="Back"
+            width="px-2"
+            height={"py-0.5"}
+            onClick={() => {
+              history("../../");
+            }}
+          />
+        </div>
       </div>
     </div>
   );
