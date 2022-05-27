@@ -6,7 +6,6 @@ const Table = ({ datas, height, onClickLink, ...props }) => {
   const allStockData = datas
     ? datas.length > 0
       ? datas.map((stock, index) => {
-          console.log(stock.PrevClosingPrice);
           return {
             Kode: stock.Code ? stock.Code : "Code Undifined",
             Nama: stock.Name ? stock.Name : "Name Undifined",
