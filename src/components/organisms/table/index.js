@@ -6,29 +6,46 @@ const Table = ({ datas, height, onClickLink, ...props }) => {
   const allStockData = datas
     ? datas.length > 0
       ? datas.map((stock, index) => {
+          console.log(stock.PrevClosingPrice);
           return {
-            Kode: stock.Code,
-            Nama: stock.Name,
-            Sektor: stock.NewSectorName,
-            "Sub Industri": stock.NewSubIndustryName,
-            Last: stock.Last.toLocaleString(),
-            Previous: stock.PrevClosingPrice.toLocaleString(),
-            Open: stock.AdjustedOpenPrice.toLocaleString(),
-            High: stock.AdjustedHighPrice.toLocaleString(),
-            Low: stock.AdjustedLowPrice.toLocaleString(),
-            PER: stock.Per,
-            PBV: stock.Pbr,
-            Volume: stock.Volume.toLocaleString(),
-            Value: stock.Value.toLocaleString(),
-            "Frekuensi Perdagangan": stock.Frequency.toLocaleString(),
-            ROE: stock.Roe,
-            "1 Hari": (stock.OneDay * 100).toFixed(2),
-            MtD: (stock.Mtd * 100).toFixed(2),
-            "1 Bulan": (stock.OneMonth * 100).toFixed(2),
-            YtD: (stock.Ytd * 100).toFixed(2),
-            "1 Tahun": (stock.OneYear * 100).toFixed(2),
-            "Market Capital": stock.Capitalization.toLocaleString(),
-            "Last Update": moment(stock.LastUpdate).local().format("LL"),
+            Kode: stock.Code ? stock.Code : "Code Undifined",
+            Nama: stock.Name ? stock.Name : "Name Undifined",
+            Sektor: stock.NewSectorName ? stock.NewSectorName : "-",
+            "Sub Industri": stock.NewSubIndustryName
+              ? stock.NewSubIndustryName
+              : "-",
+            Last: stock.Last ? stock.Last.toLocaleString() : 0,
+            Previous: stock.PrevClosingPrice
+              ? stock.PrevClosingPrice.toLocaleString()
+              : 0,
+            Open: stock.AdjustedOpenPrice
+              ? stock.AdjustedOpenPrice.toLocaleString()
+              : 0,
+            High: stock.AdjustedHighPrice
+              ? stock.AdjustedHighPrice.toLocaleString()
+              : 0,
+            Low: stock.AdjustedLowPrice
+              ? stock.AdjustedLowPrice.toLocaleString()
+              : 0,
+            PER: stock.Per ? stock.Per : "-",
+            PBV: stock.Pbr ? stock.Pbr : "-",
+            Volume: stock.Volume ? stock.Volume.toLocaleString() : "-",
+            Value: stock.Value ? stock.Value.toLocaleString() : "-",
+            "Frekuensi Perdagangan": stock.Frequency
+              ? stock.Frequency.toLocaleString()
+              : "-",
+            ROE: stock.Roe ? stock.Roe : "-",
+            "1 Hari": stock.OneDay ? (stock.OneDay * 100).toFixed(2) : "-",
+            MtD: stock.Mtd ? (stock.Mtd * 100).toFixed(2) : "-",
+            "1 Bulan": stock.OneMonth ? (stock.OneMonth * 100).toFixed(2) : "-",
+            YtD: stock.Ytd ? (stock.Ytd * 100).toFixed(2) : "-",
+            "1 Tahun": stock.OneYear ? (stock.OneYear * 100).toFixed(2) : "-",
+            "Market Capital": stock.Capitalization
+              ? stock.Capitalization.toLocaleString()
+              : "-",
+            "Last Update": stock.LastUpdate
+              ? moment(stock.LastUpdate).local().format("LL")
+              : "-",
           };
         })
       : "not found!"
@@ -111,7 +128,13 @@ const Table = ({ datas, height, onClickLink, ...props }) => {
                         key === 18 ||
                         key === 19 ? (
                         <TextDinamis
-                          title={stock[emiten] ? stock[emiten] + "%" : `-`}
+                          title={
+                            stock[emiten]
+                              ? stock[emiten] !== "-"
+                                ? stock[emiten] + "%"
+                                : stock[emiten]
+                              : `-`
+                          }
                           textLight={true}
                           textColor={
                             stock[emiten] > 0

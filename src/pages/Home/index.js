@@ -44,7 +44,7 @@ const Home = () => {
             <CardIcon
               src={RecomendSystem}
               className={`w-60 h-60 md:w-80 lg:w-96  md:h-80 lg:h-96 `}
-              title={`Computer Vision`}
+              title={`Object Detection`}
               href={`/main/comvis`}
               navigate={`/main/comvis`}
             />
@@ -54,7 +54,7 @@ const Home = () => {
 
       <div className={`hidden text-center md:block`}>
         <Gap className={`h-28`} />
-        <Link title={`©2022 Sekhudin | `} href={`#`} textLink={`Bantuan`} />
+        <Link title={`©2022, Tim GetStock | `} href={`#`} textLink={`Bantuan`} />
       </div>
     </div>
   );
