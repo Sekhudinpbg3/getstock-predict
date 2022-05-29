@@ -5,12 +5,14 @@ import { Gap, IconAhref, Label, Link, TextDinamis } from "../../atoms";
 import { notificationAlert } from "../../../utils/custom-alert";
 
 const Footer = () => {
-  const handleClick=()=>{
+  const handleClick = () => {
     notificationAlert(
+      "succes",
       "Pemberitahuan",
-      "Untuk saat ini menu yang Anda tuju belum tersedia."
-    )
-  }
+      "Untuk saat ini menu yang Anda tuju belum tersedia.",
+      ""
+    );
+  };
   return (
     <div
       className={`px-3 py-1.5 sm:px-5 md:px-10 md:py-2 lg:px-16 xl:px-24 xl:py-2.5 2xl:px-36 2xl:py-3 w-full bg-white drop-shadow-lg border-2 border-gray-100 `}
@@ -28,7 +30,7 @@ const Footer = () => {
             />
             <div className={`text-center`}>
               <IconAhref
-              href={''}
+                href={""}
                 src={DataImage}
                 onClick={handleClick}
                 className={`w-40 h-40 -mt-5 bg-white`}
